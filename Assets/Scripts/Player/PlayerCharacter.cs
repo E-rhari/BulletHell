@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour
+public abstract class PlayerCharacter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+     [SerializeField] protected float baseSpeed = 5f;
+    private float currentSpeed;
+    // protected SpriteRenderer spriteRenderer;
+
+
+    protected abstract void Shoot();
+
+
+    protected void Movement(){
+        Vector3 displacement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))*currentSpeed;
+        transform.Translate(displacement*Time.deltaTime); 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    }
+
+    protected void GetPendentComponents(){
+        // spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }
