@@ -13,11 +13,6 @@ public class ViolinGirl : PlayerCharacter
         GetPendentComponents();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Movement();
-    }
 
     protected override void Shoot()
     {

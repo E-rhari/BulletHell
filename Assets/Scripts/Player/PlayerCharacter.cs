@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class PlayerCharacter : MonoBehaviour
 {
      [SerializeField] protected float baseSpeed = 5f;
     private float currentSpeed;
-    // protected SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
     protected Hitbox hitbox;
 
 
     protected abstract void Shoot();
+
+
+    void Start()
+    {
+        GetPendentComponents();
+    }
+
+    void Update(){
+        Movement();
+    }
 
 
     protected void Movement(){
@@ -31,7 +42,7 @@ public abstract class PlayerCharacter : MonoBehaviour
     }
 
     protected void GetPendentComponents(){
-        // spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         hitbox = GetComponentInChildren<Hitbox>();
     }
 }
