@@ -7,9 +7,14 @@ public abstract class PlayerCharacter : MonoBehaviour
 {
      [SerializeField] protected float baseSpeed = 5f;
     protected float currentSpeed;
+    
+    public int extraLives {get; protected set;} = 2;
+
     protected SpriteRenderer spriteRenderer;
+    protected Rigidbody2D rb;
     protected Hitbox hitbox;
-    protected int extraLives = 2;
+
+    [SerializeField] protected bool moveWithRb = false; // stupid and temporary
 
 
     protected abstract void Shoot();
@@ -22,15 +27,37 @@ public abstract class PlayerCharacter : MonoBehaviour
 
     void Update()
     {
-        Movement();
+        if(!moveWithRb)
+            Movement();
     }
 
+    void FixedUpdate()
+    {
+        if(moveWithRb)
+            RbMovement();
+    }
 
+    /// <summary>
+    ///     Defines the hability of the object to move according to player input.
+    ///     Moves using the transform component, not the rigidbody. Should be ran
+    ///     in Update();
+    /// </summary>
     protected void Movement()
     {
         Focus();
         Vector3 displacement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))*currentSpeed;
         transform.Translate(displacement*Time.deltaTime); 
+    }
+
+    /// <summary>
+    ///     Defines the hability of the object to move according to player input.
+    ///     Moves using the RigidBody2D component. Should be ran in FixedUpdate();
+    /// </summary>
+    protected void RbMovement()
+    {
+        Focus();
+        Vector2 displacement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))*currentSpeed;
+        rb.MovePosition(rb.position + displacement*Time.fixedDeltaTime);
     }
 
     protected void Focus()
@@ -48,7 +75,8 @@ public abstract class PlayerCharacter : MonoBehaviour
     protected void GetPendentComponents()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hitbox = GetComponentInChildren<Hitbox>();
+        hitbox = GetComponent<Hitbox>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void damage()
