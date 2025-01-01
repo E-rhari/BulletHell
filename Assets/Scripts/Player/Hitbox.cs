@@ -6,11 +6,13 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
+    PlayerCharacter player;
 
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GetComponent<PlayerCharacter>();
         Hide();
     }
 
@@ -23,11 +25,19 @@ public class Hitbox : MonoBehaviour
             Hide();
     }
 
+
     public void Hide(){
         spriteRenderer.color *= new Color(1,1,1,0);
     }
 
     public void Show(){
         spriteRenderer.color += new Color(0,0,0,1);
+    }
+
+    
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Damage" || other.gameObject.GetComponent<Damage>())
+            player.Damage();
     }
 }

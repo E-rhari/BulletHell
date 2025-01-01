@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 363925050}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 1846978542}
   m_Layer: 0
   m_Name: ViolinGirl
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,8 +648,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 5
-  moveWithRb: 1
+  damageCoolDown: 1
   bullet: {fileID: 0}
+  moveWithRb: 1
 --- !u!1 &2059985424
 GameObject:
   m_ObjectHideFlags: 0

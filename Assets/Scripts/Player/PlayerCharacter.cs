@@ -10,9 +10,14 @@ public abstract class PlayerCharacter : MonoBehaviour
     
     public int extraLives {get; protected set;} = 2;
 
+    [SerializeField] protected float damageCoolDown = 1f;
+    protected float damageTimer = 0f;
+
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb;
     protected Hitbox hitbox;
+    
+    [SerializeField] protected GameObject bullet;
 
     [SerializeField] protected bool moveWithRb = false; // stupid and temporary
 
@@ -22,11 +27,12 @@ public abstract class PlayerCharacter : MonoBehaviour
 
     void Start()
     {
-        GetPendentComponents();
+        GetDependencies();
     }
 
     void Update()
     {
+        damageTimer += Time.deltaTime;
         if(!moveWithRb)
             Movement();
     }
@@ -72,23 +78,43 @@ public abstract class PlayerCharacter : MonoBehaviour
         }
     }
 
-    protected void GetPendentComponents()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        hitbox = GetComponent<Hitbox>();
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void damage()
-    {
-        if(extraLives <= 0)
-            Destroy(gameObject);
-        else
-            extraLives--;
-    }
 
     public void lifeRecover()
     {
         extraLives++;
+    }
+
+    public void Damage()
+    {
+        if(damageTimer >= damageCoolDown){
+            if(extraLives <= 0)
+                Destroy(gameObject);
+            else
+                extraLives--;
+            damageTimer = 0;
+            StartCoroutine(DamageFlicker());
+        }
+    }
+
+    protected IEnumerator DamageFlicker(float waitTime=0.1f)
+    {
+        Debug.Log("1");
+        while(damageTimer < damageCoolDown)
+        {
+            Debug.Log("2");
+            spriteRenderer.color -= new Color(0,0,0,1);
+            yield return new WaitForSeconds(waitTime);
+            spriteRenderer.color += new Color(0,0,0,1);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+
+    protected void GetDependencies()
+    {
+        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        hitbox = GetComponent<Hitbox>();
+        rb = GetComponent<Rigidbody2D>();
+        damageTimer = damageCoolDown;
     }
 }
