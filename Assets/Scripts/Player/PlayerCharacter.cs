@@ -13,6 +13,10 @@ public abstract class PlayerCharacter : MonoBehaviour
     [SerializeField] protected float damageCoolDown = 1f;
     protected float damageTimer = 0f;
 
+    
+    [SerializeField] protected float shootCoolDown = 1f;
+    protected float shootTimer; 
+
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb;
     protected Hitbox hitbox;
@@ -33,8 +37,12 @@ public abstract class PlayerCharacter : MonoBehaviour
     void Update()
     {
         damageTimer += Time.deltaTime;
+        shootTimer += Time.deltaTime;
+
         if(!moveWithRb)
             Movement();
+        if(Input.GetKey(KeyCode.Z))
+            Shoot();
     }
 
     void FixedUpdate()
@@ -42,6 +50,7 @@ public abstract class PlayerCharacter : MonoBehaviour
         if(moveWithRb)
             RbMovement();
     }
+
 
     /// <summary>
     ///     Defines the hability of the object to move according to player input.
@@ -98,10 +107,8 @@ public abstract class PlayerCharacter : MonoBehaviour
 
     protected IEnumerator DamageFlicker(float waitTime=0.1f)
     {
-        Debug.Log("1");
         while(damageTimer < damageCoolDown)
         {
-            Debug.Log("2");
             spriteRenderer.color -= new Color(0,0,0,1);
             yield return new WaitForSeconds(waitTime);
             spriteRenderer.color += new Color(0,0,0,1);
