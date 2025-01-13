@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class TrajectoryBehaviour : MonoBehaviour
 {
 
-    [SerializeField] protected float speedX;
-    [SerializeField] protected float speedY;
+    [SerializeField] protected float speed;
+    [SerializeField] protected Direction direction;
 
 
     protected abstract void Move();

@@ -8,8 +8,8 @@ public class ViolinGirl : PlayerCharacter
     protected override void Shoot()
     {
         if(shootTimer >= shootCoolDown){
-            Instantiate(bullet, transform.position, new Quaternion(0,0,0,0));
-            shootTimer = 0f;
+            GameObject bullet1 = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + spriteRenderer.bounds.size.y/2 + bullet.GetComponent<SpriteRenderer>().bounds.size.y/2), new Quaternion(0,0,0,0));
+            shootTimer = 0;
         }
     }
 }

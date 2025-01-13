@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SenoidTrajectory : TrajectoryBehaviour
 {
-    [SerializeField] Direction direction;
     private float time = 0;
     private Vector3 displacement = new Vector3(0,0);
     private Vector3 lastDisplacement = new Vector3(0,0);
@@ -20,15 +19,12 @@ public class SenoidTrajectory : TrajectoryBehaviour
         displacement = new Vector3(0,0);
         time += Time.deltaTime;
 
-        if(speedX != 0)
-            displacement += new Vector3(Mathf.Sin(time*speedX)-lastDisplacement.x, 0);
-        if(speedY != 0)
-            displacement += new Vector3(0, Mathf.Sin(time*speedY)-lastDisplacement.y);
+        if(direction == Direction.Horizontal)
+            displacement += new Vector3(Mathf.Sin(time*speed)-lastDisplacement.x, 0);
+        else if(direction == Direction.Vertical)
+            displacement += new Vector3(0, Mathf.Sin(time*speed)-lastDisplacement.y);
 
-        // transform.Translate(displacement);
         transform.position += displacement;
         lastDisplacement = transform.position - center;
-
-        // transform.Translate(trajectory);
     }
 }
