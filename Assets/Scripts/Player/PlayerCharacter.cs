@@ -29,12 +29,12 @@ public abstract class PlayerCharacter : MonoBehaviour
     protected abstract void Shoot();
 
 
-    void Start()
+    protected virtual void Start()
     {
         GetDependencies();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         damageTimer += Time.deltaTime;
         shootTimer += Time.deltaTime;
@@ -45,7 +45,7 @@ public abstract class PlayerCharacter : MonoBehaviour
             Shoot();
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if(moveWithRb)
             RbMovement();
