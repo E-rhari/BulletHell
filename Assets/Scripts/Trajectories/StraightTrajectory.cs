@@ -13,6 +13,6 @@ public class StraightTrajectory : TrajectoryBehaviour
         else if(direction == Direction.Vertical)
             displacement = new Vector3(0, speed*Time.deltaTime);
 
-        transform.position += displacement;
+        transform.Translate(displacement);
     }
 }

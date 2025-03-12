@@ -5,12 +5,16 @@ using UnityEngine;
 
 public abstract class TrajectoryBehaviour : MonoBehaviour
 {
-    [SerializeField] protected float speed;
+    [SerializeField] protected float speed = 10f;
     [SerializeField] protected Direction direction;
 
 
     protected abstract void Move();
 
+
+    public virtual void Start()
+    {
+    }
 
     protected virtual void Update()
     {

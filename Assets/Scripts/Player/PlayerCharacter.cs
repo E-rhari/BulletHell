@@ -10,12 +10,9 @@ public abstract class PlayerCharacter : MonoBehaviour
     
     public int extraLives {get; protected set;} = 2;
 
-    [SerializeField] protected float damageCoolDown = 1f;
+    [SerializeField] protected float damageCoolDown = 3f;
     protected float damageTimer = 0f;
 
-    
-    [SerializeField] protected float shootCoolDown = 1f;
-    protected float shootTimer; 
 
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb;
@@ -26,9 +23,6 @@ public abstract class PlayerCharacter : MonoBehaviour
     [SerializeField] protected bool moveWithRb = false; // stupid and temporary
 
 
-    protected abstract void Shoot();
-
-
     protected virtual void Start()
     {
         GetDependencies();
@@ -37,12 +31,9 @@ public abstract class PlayerCharacter : MonoBehaviour
     protected virtual void Update()
     {
         damageTimer += Time.deltaTime;
-        shootTimer += Time.deltaTime;
 
         if(!moveWithRb)
             Movement();
-        if(Input.GetKey(KeyCode.Z))
-            Shoot();
     }
 
     protected virtual void FixedUpdate()
@@ -92,6 +83,7 @@ public abstract class PlayerCharacter : MonoBehaviour
     {
         extraLives++;
     }
+
 
     public void Damage()
     {

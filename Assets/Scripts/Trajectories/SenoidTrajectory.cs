@@ -12,7 +12,7 @@ public class SenoidTrajectory : TrajectoryBehaviour
     private Vector3 center;
 
 
-    public void Start()
+    public override void Start()
     {
         center = transform.position;
     }

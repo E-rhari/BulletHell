@@ -5,18 +5,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    
-
-    // Start is called before the first frame update
-    void Start()
+     void OnTriggerExit2D(Collider2D other)
     {
-        
+        if(other.gameObject.tag == "MainCamera" || other.gameObject.GetComponent<Camera>())
+            this.gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 }
