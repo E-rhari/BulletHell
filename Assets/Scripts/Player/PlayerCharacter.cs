@@ -64,6 +64,7 @@ public abstract class PlayerCharacter : MonoBehaviour
         Focus();
         Vector2 displacement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))*currentSpeed;
         rb.MovePosition(rb.position + displacement*Time.fixedDeltaTime);
+        transform.position = transform.position;
     }
 
     protected void Focus()
@@ -111,7 +112,7 @@ public abstract class PlayerCharacter : MonoBehaviour
 
     protected void GetDependencies()
     {
-        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
         hitbox = GetComponent<Hitbox>();
         rb = GetComponent<Rigidbody2D>();
         damageTimer = damageCoolDown;

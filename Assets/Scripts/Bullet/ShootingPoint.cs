@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShootingPoint : MonoBehaviour
 {
     [SerializeField] protected float shootCoolDown = 1f;
     protected float shootTimer; 
+
     
     [SerializeField] private KeyCode shootKey = KeyCode.Z;
     [SerializeField] private bool alwaysShooting = false;
+    
+    [SerializeField] private bool follow = false;
 
     [SerializeField] private GameObject baseBullet;
 
@@ -22,12 +26,7 @@ public class ShootingPoint : MonoBehaviour
     {
         bullets = new List<GameObject>();
         for(int i = 0; i < pooledAmount; i++)
-        {
-            GameObject obj = Instantiate(baseBullet);
-            obj.SetActive(false);
-            bullets.Add(obj);
-        }
-
+            CreateBullet();
     }
 
 
@@ -58,9 +57,17 @@ public class ShootingPoint : MonoBehaviour
         foreach(GameObject obj in bullets)
             if(!obj.activeInHierarchy)
                 return obj;
-        GameObject newObj = Instantiate(baseBullet);
-        newObj.SetActive(false);
-        bullets.Add(newObj);
+        GameObject newObj = CreateBullet();
         return newObj;
+    }
+
+    private GameObject CreateBullet()
+    {
+        GameObject obj = Instantiate(baseBullet);
+        obj.SetActive(false);
+        bullets.Add(obj);
+        if(follow)
+            obj.transform.SetParent(this.transform);
+        return obj;
     }
 }

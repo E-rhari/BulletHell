@@ -25,6 +25,7 @@ public abstract class TrajectoryBehaviour : MonoBehaviour
     
     protected enum Direction{
         Vertical,
-        Horizontal
+        Horizontal,
+        All
     }
 }

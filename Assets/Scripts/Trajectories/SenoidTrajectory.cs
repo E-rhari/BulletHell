@@ -7,7 +7,7 @@ public class SenoidTrajectory : TrajectoryBehaviour
 {
     private float time = 0;
     private Vector3 displacement = new Vector3(0,0);
-    private Vector3 centerRelativeCenter = new Vector3(0,0);
+    private Vector3 relativeCenter = new Vector3(0,0);
 
     private Vector3 center;
 
@@ -18,18 +18,26 @@ public class SenoidTrajectory : TrajectoryBehaviour
     }
 
 
+    public void OnEnable()
+    {
+        time = 0;
+        center = transform.position;
+        relativeCenter = new Vector3(0,0);
+    }
+
+
     protected override void Move()
     {
         displacement = new Vector3(0,0);
         time += Time.deltaTime;
-        center = transform.position - centerRelativeCenter;
+        center = transform.position - relativeCenter;
 
-        if(direction == Direction.Horizontal)
-            displacement += new Vector3(Mathf.Sin(time*speed)-centerRelativeCenter.x, 0);
-        else if(direction == Direction.Vertical)
-            displacement += new Vector3(0, Mathf.Sin(time*speed)-centerRelativeCenter.y);
+        if(direction == Direction.Horizontal || direction == Direction.All)
+            displacement += new Vector3(Mathf.Sin(time*speed)-relativeCenter.x, 0);
+        else if(direction == Direction.Vertical || direction == Direction.All)
+            displacement += new Vector3(0, Mathf.Sin(time*speed)-relativeCenter.y);
 
         transform.position += displacement;
-        centerRelativeCenter = transform.position - center;
+        relativeCenter = transform.position - center;
     }
 }
