@@ -201,9 +201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6cda840b85c75c42840ca9483a2220b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCoolDown: 0.25
+  shootCoolDown: 0.1
   shootKey: 122
   alwaysShooting: 0
+  follow: 1
   baseBullet: {fileID: 5152624262705762441, guid: fdde8364f628c5e4990f28a2c7d30658, type: 3}
   pooledAmount: 20
 --- !u!1 &157167777
@@ -266,6 +267,7 @@ MonoBehaviour:
   shootCoolDown: 0.25
   shootKey: 122
   alwaysShooting: 0
+  follow: 0
   baseBullet: {fileID: 5302323453286067194, guid: 80bb1e4aae688ce4ea69c58e68422594, type: 3}
   pooledAmount: 10
 --- !u!1 &363925048
@@ -702,6 +704,7 @@ MonoBehaviour:
   shootCoolDown: 0.25
   shootKey: 122
   alwaysShooting: 0
+  follow: 0
   baseBullet: {fileID: 5302323453286067194, guid: 80bb1e4aae688ce4ea69c58e68422594, type: 3}
   pooledAmount: 10
 --- !u!114 &1241803675
@@ -732,7 +735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1783550860
 Transform:
   m_ObjectHideFlags: 0
@@ -760,9 +763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6cda840b85c75c42840ca9483a2220b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCoolDown: 0.25
+  shootCoolDown: 0.1
   shootKey: 122
   alwaysShooting: 0
+  follow: 1
   baseBullet: {fileID: 5152624262705762441, guid: fdde8364f628c5e4990f28a2c7d30658, type: 3}
   pooledAmount: 20
 --- !u!1 &1846978537
@@ -954,7 +958,7 @@ MonoBehaviour:
   baseSpeed: 5
   damageCoolDown: 1
   bullet: {fileID: 5152624262705762441, guid: fdde8364f628c5e4990f28a2c7d30658, type: 3}
-  moveWithRb: 1
+  moveWithRb: 0
 --- !u!1 &2059985424
 GameObject:
   m_ObjectHideFlags: 0
