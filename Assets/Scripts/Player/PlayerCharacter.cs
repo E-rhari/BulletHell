@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerCharacter : MonoBehaviour
 {
-     [SerializeField] protected float baseSpeed = 5f;
+    [SerializeField] protected float baseSpeed = 5f;
     protected float currentSpeed;
     
     public int extraLives {get; protected set;} = 2;
